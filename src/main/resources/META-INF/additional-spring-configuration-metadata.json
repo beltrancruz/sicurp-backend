@@ -1,0 +1,12 @@
+{"properties": [
+  {
+    "name": "server.wscurp.address",
+    "type": "java.lang.String",
+    "description": "Dirección IP de WS CURP Morelos."
+  },
+  {
+    "name": "server.wscurp.token",
+    "type": "java.lang.String",
+    "description": "Token de WS CURP Morelos."
+  }
+]}
