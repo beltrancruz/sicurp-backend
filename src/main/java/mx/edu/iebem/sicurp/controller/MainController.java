@@ -17,13 +17,18 @@ import org.springframework.web.bind.annotation.PathVariable;
 @RequestMapping("/iebem")
 public class MainController {
     
-
     @Autowired
     private MainService mainService;
 
     @GetMapping("/curp/{curp}")
     public ResponseEntity<Wscurp> getDataByCurp(@PathVariable("curp") String curp) {
         return new ResponseEntity<>(mainService.getDataByCurp(curp), HttpStatus.OK);
+    }
+
+    @GetMapping("/curp/talumnos")
+    public ResponseEntity<Void> doCurpTAlumnos() {
+        mainService.doCurpTAlumnos();
+        return new ResponseEntity<>(HttpStatus.OK);
     }
     
 }
