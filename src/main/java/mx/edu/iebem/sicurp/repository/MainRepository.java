@@ -6,6 +6,6 @@ public interface MainRepository {
 
     public Wscurp getDataByCurp(String curp);
 
-    public void doCurpTAlumnos(int lote);
+    public void doCurpTAlumnos(int lote, int times);
     
 }

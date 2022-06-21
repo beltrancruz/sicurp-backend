@@ -32,8 +32,8 @@ public class MainService implements MainRepository {
     }
 
     @Override
-    public void doCurpTAlumnos(int lote) {
-        // for (int i = 0; i < 7; i++) {
+    public void doCurpTAlumnos(int lote, int times) {
+        for (int i = 0; i < times; i++) {
             final String SQL_UPDATE_CURP = "UPDATE TAlumnosValidaCurp SET VALIDADO = 1 WHERE ID = ?;";
             final String SQL_CURPS = "SELECT TOP(?) ID, CURP, SEGMENTO, VALIDADO FROM TAlumnosValidaCurp WHERE VALIDADO = 0;";
             final String SQL_SAVE_CURP = "INSERT INTO TCurpValidacionRenapo(" +
@@ -67,7 +67,7 @@ public class MainService implements MainRepository {
                     this.jdbc.update(SQL_UPDATE_CURP, curp.getId());
                 }
             }
-        // }
+        }
     }
 
 }
