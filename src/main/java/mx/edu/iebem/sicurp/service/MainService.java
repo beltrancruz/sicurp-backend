@@ -5,7 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
+// import org.springframework.transaction.annotation.Transactional;
 
 import mx.edu.iebem.sicurp.mapper.TAlumnosValidaCurpMapper;
 import mx.edu.iebem.sicurp.model.TAlumnosValidaCurp;
@@ -14,7 +14,7 @@ import mx.edu.iebem.sicurp.repository.MainRepository;
 import mx.edu.iebem.sicurp.util.RestClient;
 
 @Service
-@Transactional
+// @Transactional
 public class MainService implements MainRepository {
 
     @Autowired
@@ -32,10 +32,10 @@ public class MainService implements MainRepository {
     }
 
     @Override
-    public void doCurpTAlumnos() {
+    public void doCurpTAlumnos(int lote) {
         // for (int i = 0; i < 7; i++) {
             final String SQL_UPDATE_CURP = "UPDATE TAlumnosValidaCurp SET VALIDADO = 1 WHERE ID = ?;";
-            final String SQL_CURPS = "SELECT TOP(50000) ID, CURP, SEGMENTO, VALIDADO FROM TAlumnosValidaCurp WHERE VALIDADO = 0;";
+            final String SQL_CURPS = "SELECT TOP(?) ID, CURP, SEGMENTO, VALIDADO FROM TAlumnosValidaCurp WHERE VALIDADO = 0;";
             final String SQL_SAVE_CURP = "INSERT INTO TCurpValidacionRenapo(" +
             "curpLocal, " +"curpRenapo, " +"nombreRenapo, " +"apellidoPaterno, " +
             "apellidoMaterno, " +"sexo, " +"fechaNacimiento, " +"Segmento, " +
@@ -43,7 +43,7 @@ public class MainService implements MainRepository {
             "documentoProbatorio, " +"estatusCurp, " +
             "anioRegistro) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?) ";
     
-            List<TAlumnosValidaCurp> curps = this.jdbc.query(SQL_CURPS, tAlumnosValidaCurpMapper);
+            List<TAlumnosValidaCurp> curps = this.jdbc.query(SQL_CURPS, tAlumnosValidaCurpMapper, lote);
             for(TAlumnosValidaCurp curp : curps) {
                 Wscurp newcurp = this.rest.getDataByCurp(curp.getCurp());
     

@@ -25,9 +25,9 @@ public class MainController {
         return new ResponseEntity<>(mainService.getDataByCurp(curp), HttpStatus.OK);
     }
 
-    @GetMapping("/curp/talumnos")
-    public ResponseEntity<Void> doCurpTAlumnos() {
-        mainService.doCurpTAlumnos();
+    @GetMapping("/curp/talumnos/{lote}")
+    public ResponseEntity<Void> doCurpTAlumnos(@PathVariable("lote") int lote) {
+        mainService.doCurpTAlumnos(lote);
         return new ResponseEntity<>(HttpStatus.OK);
     }
     
